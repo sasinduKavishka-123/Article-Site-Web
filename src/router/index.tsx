@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { useAuth } from "../hooks/useAuth";
 import Register from "../pages/Register"
 import Login from "../pages/Login"
+import Home from "../pages/Home";
+import MainLayout from "../components/layout/MainLayout";
 
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] }
@@ -44,7 +46,9 @@ export default function AppRouter() {
             <Routes>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
+                <Route path="/" element={<MainLayout />}>
+                    <Route path="/" element={<Home />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     )

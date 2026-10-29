@@ -1,5 +1,8 @@
 import { useSearchParams } from "react-router-dom"
 import SearchBar from "../components/ui/SearchBar"
+import Spinner from "../components/ui/Spinner"
+import EmptyState from "../components/ui/EmptyState"
+import Pagination from "../components/ui/Pagination"
 
 export default function Home() {
     const [params, setParams] = useSearchParams()
@@ -39,7 +42,7 @@ export default function Home() {
                 </p>
                 <h2 className="mt-2 mb-6 text-4xl font-extrabold tracking-tighter">Newest articles</h2>
 
-                {/* {loading && !data ? (
+                {loading && !data ? (
                     <Spinner />
                 ) : error ? (
                     <EmptyState title="Could not load articles" text={error} />
@@ -52,7 +55,7 @@ export default function Home() {
                         </div>
                         <Pagination page={data.page} pages={data.pages} onChange={(p) => update({ page: p === 1 ? "" : String(p) })} />
                     </>
-                )} */}
+                )}
             </section>
         </div>
     )

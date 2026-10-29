@@ -43,8 +43,9 @@ export default function AuthLayout({
       <main className="relative mx-auto flex max-w-6xl justify-center px-6 py-14 sm:py-20">
         <div className="w-full max-w-md">
           <p className="mb-4 flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-[#14b8f6]">
-            <span className="h-0.5 w-6 bg-[#14b8f6]" />
+            <span className="h-0.5 w-1.5 bg-[#14b8f6]" />
             {eyebrow}
+            <span className="h-0.5 w-1.5 bg-[#14b8f6]" />
           </p>
           <h1 className="text-center text-4xl font-extrabold tracking-tighter sm:text-5xl">
             {title}

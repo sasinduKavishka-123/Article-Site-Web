@@ -21,7 +21,7 @@ function Register() {
     const [password, setPassword] = useState("")
     const [conPassword, setConPassword] = useState("")
     const [errors, setErrors] = useState<RegisterErrors>({})
-    const [serverError, setServerError] = useState("") 
+    const [serverError, setServerError] = useState("")
     const [loading, setLoading] = useState(false)
 
     const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
@@ -53,7 +53,7 @@ function Register() {
         }
         catch (err) {
             const txt = err instanceof Error ? err.message : "Someting went wrong"
-            setServerError( txt + ". Please try again.")
+            setServerError(txt + ". Please try again.")
         } finally {
             setLoading(false)
         }
@@ -61,19 +61,19 @@ function Register() {
 
     return (
         <AuthLayout
-            eyebrow="Join the community" 
-            title={"Create your account."} 
-            subtitle={"Publish reviews, guides and news"} 
+            eyebrow="Join the community"
+            title={"Create your account."}
+            subtitle={"Publish reviews, guides and news"}
             footer={
                 <>
                     Already have an account?{" "}
                     <Link to="/login" className="font-semibold text-[#14b8f6] hover:underline">
-                        Log in    
+                        Log in
                     </Link>
                 </>
-            }        
+            }
         >
-            <ErrorBanner message={serverError}/>
+            <ErrorBanner message={serverError} />
             <form onSubmit={handleRegister} noValidate className="space-y-5">
                 <Field
                     id="userName"

@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-slate-400">
-            A community for game reviews, news, and guides. Read, write, and talk about the games you love.
+            A community for game reviews, news and guides. Read, write and talk about the games you love.
           </p>
         </div>
         <div>

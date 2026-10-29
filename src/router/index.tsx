@@ -24,7 +24,9 @@ const RequireAuth = ({ children, roles }: RequireAuthTypes) => {
         )
     }
 
-    if (!user) return <Navigate to={"/login"} replace />
+    if (!user) {
+        return <Navigate to={"/login"} replace />
+    }
 
     if (roles && !roles.some((role) => user?.roles.includes(role))) {
         return (
@@ -46,7 +48,11 @@ export default function AppRouter() {
             <Routes>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/" element={<MainLayout />}>
+                <Route element={
+                    <RequireAuth>
+                        <MainLayout />
+                    </RequireAuth>
+                }>
                     <Route path="/" element={<Home />} />
                 </Route>
             </Routes>

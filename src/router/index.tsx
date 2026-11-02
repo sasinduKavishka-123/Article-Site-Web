@@ -5,6 +5,7 @@ import Register from "../pages/Register"
 import Login from "../pages/Login"
 import Home from "../pages/Home";
 import MainLayout from "../components/layout/MainLayout";
+import MyArticles from "../pages/MyArticles";
 
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] }
@@ -54,6 +55,7 @@ export default function AppRouter() {
                     </RequireAuth>
                 }>
                     <Route path="/" element={<Home />} />
+                    <Route path="/my-articles" element={<MyArticles/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

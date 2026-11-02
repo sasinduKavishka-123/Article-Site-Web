@@ -30,7 +30,7 @@ export default function Home() {
 
     const fetchArticles = () => {
         setLoading(true)
-        getAllArticles(page, 6)
+        getAllArticles(page, 3)
             .then((res) => {
                 setArticles(res.data)
                 setTotalPages(res.meta.totalPages)
@@ -87,9 +87,10 @@ export default function Home() {
                 ) : (
                     <>
                         <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${loading ? "opacity-60" : ""}`}>
-                            {articles.map((a) => <ArticleCard key={a._id} item={a} />)}
+                            {articles.map((a) => <ArticleCard key={a._id} article={a} />)}
                         </div>
-                        <Pagination page={page} pages={totalPages} onChange={(p) => update({ page: p === 1 ? "" : String(p) })} />
+                        {/* <Pagination page={page} pages={totalPages} onChange={(p) => update({ page: p === 1 ? "" : String(p) })} /> */}
+                        <Pagination page={page} pages={totalPages} onChange={(p) => setPage(p)} />
                     </>
                 )}
             </section>

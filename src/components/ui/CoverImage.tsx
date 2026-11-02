@@ -12,7 +12,7 @@ export default function CoverImage({ src, alt, className=""}: Props){
         return(
             <div
                 aria-hidden="true"
-                className={`flex items-center justify-center bg-gradient-to-br from-accent/25 via-field to-base text-4xl ${className}`}
+                className={`flex items-center justify-center bg-linear-to-br from-accent/25 via-field to-base text-4xl ${className}`}
             >
                 🎮
             </div>

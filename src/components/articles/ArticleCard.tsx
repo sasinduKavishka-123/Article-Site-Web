@@ -36,7 +36,7 @@ const ArticleCard = ({article} : {article: Article}) => {
                     <span className="truncate">
                         {article.author.name} · {formatDate(article.createdAt)}
                     </span>
-                    <span aria-label={`${article.likes.length} likes`}>👍 {article.likes.length}</span>
+                    <span aria-label={`${article.likes.length} likes`}>♥ {article.likes.length}</span>
                 </div>
             </div>
         </article>

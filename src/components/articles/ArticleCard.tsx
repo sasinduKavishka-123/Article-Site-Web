@@ -5,15 +5,7 @@ import TagPill from "../ui/TagPill";
 import type { Article } from "../../types/types";
 import { formatDate } from "../../utils/formatDate";
 
-interface ArticleCardProps {
-    article: Article
-    onFavorite?: (e: React.MouseEvent, id: string) => void
-}
-
-const ArticleCard: React.FC<ArticleCardProps> = ({
-    article,
-    onFavorite
-}) => {
+const ArticleCard = ({article} : {article: Article}) => {
     return (
         <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-card transition hover:-translate-y-1 hover:border-accent/40">
             <Link
@@ -42,7 +34,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
                 )}
                 <div className="mt-auto flex items-center justify-between pt-5 text-sm text-slate-400">
                     <span className="truncate">
-                        {article.author.username} · {formatDate(article.createdAt)}
+                        {article.author.name} · {formatDate(article.createdAt)}
                     </span>
                     <span aria-label={`${article.likes.length} likes`}>👍 {article.likes.length}</span>
                 </div>

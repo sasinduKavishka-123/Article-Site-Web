@@ -37,7 +37,7 @@ const ArticleHero = ({ article, children }: { article: Article, children?: React
                         {article.gameNames.map((g) => (
                             <TagPill key={g} label={g} muted />
                         ))}
-                        <TagPill label={`By ${article.author.username}`} muted/>
+                        <TagPill label={`By ${article.author.name}`} muted/>
                         <TagPill label={formatDate(article.createdAt)} muted/>
                     </div>
                     {children && <div className="mt-6 space-y-3">{children}</div>}

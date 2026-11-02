@@ -8,11 +8,12 @@ import { useFetch } from "../hooks/useFetch"
 import { useAuth } from "../hooks/useAuth"
 import { useEffect, useState } from "react"
 import { getAllArticles } from "../service/article"
+import type { Article } from "../types/types"
 
 export default function Home() {
 
     const {user} = useAuth()
-    const [articles, setArticles] = useState<any[]>([])
+    const [articles, setArticles] = useState<Article[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [page, setPage] = useState<number>(1)
     const [totalPages, setTotalPages] = useState<number>(1)
@@ -87,7 +88,7 @@ export default function Home() {
                 ) : (
                     <>
                         <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${loading ? "opacity-60" : ""}`}>
-                            {articles.map((a) => <ArticleCard key={a._id} article={a} />)}
+                            {articles.map((a) => <ArticleCard key={a._id} article={a}/>)}
                         </div>
                         {/* <Pagination page={page} pages={totalPages} onChange={(p) => update({ page: p === 1 ? "" : String(p) })} /> */}
                         <Pagination page={page} pages={totalPages} onChange={(p) => setPage(p)} />

@@ -1,6 +1,7 @@
 export interface AuthorRef {
-  _id: string;
-  username: string;
+  _id: string
+  name: string
+  email: string
 }
 
 export interface Article{

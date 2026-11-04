@@ -34,15 +34,12 @@ const ArticleHero = ({ article, children }: { article: Article, children?: React
                         {article.tags.map((t) => (
                             <TagPill key={t} label={t} />
                         ))}
-                    </div>
-                    <div className="mt-5 flex flex-wrap gap-2">
                         {article.gameNames.map((g) => (
                             <TagPill key={g} label={g} muted />
                         ))}
                     </div>
-                    <div className="mt-5 flex flex-col">
-                        <span>By {article.author.name}</span>
-                        <span>{formatDate(article.createdAt)}</span>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                        <span>By {article.author.name} | {formatDate(article.createdAt)}</span>
                     </div>
                     {children && <div className="mt-5 space-y-3">{children}</div>}
                 </div>

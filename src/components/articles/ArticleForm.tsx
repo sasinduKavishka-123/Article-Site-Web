@@ -41,17 +41,6 @@ const ArticleForm = ({ submitText, loadingText, onSubmit }: Props) => {
         if (Object.keys(found).length) return
         setLoading(true)
         setServerError("")
-        // try {
-        //     const formData = new FormData()
-        //     formData.append("title", title)
-        //     formData.append("content", content)
-        //     formData.append("gameNames", JSON.stringify(gameNames))
-        //     formData.append("tags", JSON.stringify(tags))
-        //     if (coverImageUrl) {formData.append("file", coverImageUrl)}
-
-        //     const newArticle = await createArticle(formData)
-        //     navigate(`/articles/${newArticle._id}`)
-        // }
         try {
             await onSubmit({
                 title: title,

@@ -22,3 +22,8 @@ export const createArticle = async (formData: FormData) => {
 
     return res.data
 }
+
+export const changeActive = async (id: string) => {
+    const res = await api.patch(`/articles/${id}/change-activ`)
+    return res
+}

@@ -1,4 +1,4 @@
-import { data, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import ArticleForm from "../components/articles/ArticleForm"
 import { createArticle } from "../service/article"
 

@@ -2,9 +2,17 @@ import { useState, type FormEvent } from "react"
 import { ErrorBanner, Field, SubmitButton } from "../AuthLayout"
 import TagInput from "./TagInput"
 import { useNavigate } from "react-router-dom";
-import { createArticle } from "../../service/article";
+
+interface ArticleData {
+    title: string
+    content: string
+    gameNames: string[]
+    tags: string[]
+    coverImageUrl: string
+}
 
 interface Props {
+    data?: ArticleData
     submitText: string
     loadingText: string
     onSubmit: (data: any) => Promise<void>
@@ -12,15 +20,15 @@ interface Props {
 
 type Errors = Partial<Record<"title" | "content" | "coverImageUrl", string>>;
 
-const ArticleForm = ({ submitText, loadingText, onSubmit }: Props) => {
+const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
 
     const navigate = useNavigate()
 
-    const [title, setTitle] = useState<string>("")
-    const [content, setContent] = useState<string>("")
-    const [gameNames, setGameNames] = useState<string[]>([])
-    const [coverImageUrl, setCoverImageUrl] = useState<string>("")
-    const [tags, setTags] = useState<string[]>([])
+    const [title, setTitle] = useState<string>(data?.title ?? "")
+    const [content, setContent] = useState<string>(data?.content ?? "")
+    const [gameNames, setGameNames] = useState<string[]>(data?.gameNames ?? [])
+    const [coverImageUrl, setCoverImageUrl] = useState<string>(data?.coverImageUrl ?? "")
+    const [tags, setTags] = useState<string[]>(data?.tags ?? [])
     const [error, setError] = useState<Errors>({})
     const [serverError, setServerError] = useState("");
     const [loading, setLoading] = useState<boolean>(false)

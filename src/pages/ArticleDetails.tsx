@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, replace, useNavigate, useParams } from "react-router-dom"
 import type { Article } from "../types/types"
-import { getArticleById } from "../service/article"
+import { changeActive, getArticleById } from "../service/article"
 import Spinner from "../components/ui/Spinner"
 import EmptyState from "../components/ui/EmptyState"
 import ArticleHero from "../components/articles/ArticleHero"
@@ -35,7 +35,10 @@ const ArticlesDetails = () => {
     const remove = async () => {
         setBusy(true)
         try {
-            navigate("/my-articles", { replace: true })
+            if (article) {
+                await changeActive(article._id)
+                navigate("/my-articles", { replace: true })
+            }
         }
         catch (err: any) {
             setError(err.message ? err.message : "Could not delete the article.")

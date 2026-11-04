@@ -14,3 +14,11 @@ export const getMyArticles = async () => {
     const res = await api.get("/articles/my-articles")
     return res.data
 }
+
+export const createArticle = async (formData: FormData) => {
+    const res = await api.post(`/articles`, formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+    })
+
+    return res.data
+}

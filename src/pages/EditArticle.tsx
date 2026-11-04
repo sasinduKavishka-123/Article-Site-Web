@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import ArticleForm from "../components/articles/ArticleForm"
-import { useParams } from "react-router-dom"
-import { getArticleById } from "../service/article"
+import { useNavigate, useParams } from "react-router-dom"
+import { getArticleById, updateArticle } from "../service/article"
 import type { Article } from "../types/types"
 import Spinner from "../components/ui/Spinner"
 import EmptyState from "../components/ui/EmptyState"
 
 
 const EditArticle = () => {
+
+    const navigate = useNavigate()
 
     const { id } = useParams<{ id: string }>()
     const [article, setArticle] = useState<Article>()
@@ -46,7 +48,16 @@ const EditArticle = () => {
                 submitText={"Save Changes"}
                 loadingText={"Saving..."}
                 onSubmit={async (article) => {
-                    console.log(article)
+                    const formData = new FormData()
+                    formData.append("id", id ?? "")
+                    formData.append("title", article.title)
+                    formData.append("content", article.content)
+                    formData.append("gameNames", JSON.stringify(article.gameNames))
+                    formData.append("tags", JSON.stringify(article.tags))
+                    if (article.coverImageUrl) { formData.append("file", article.coverImageUrl) }
+
+                    const newArticle = await updateArticle(formData)
+                    navigate(`/articles/${newArticle._id}`)
                 }}
             />
         </div>

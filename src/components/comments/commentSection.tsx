@@ -3,7 +3,8 @@ import { useAuth } from "../../hooks/useAuth";
 import Spinner from "../ui/Spinner";
 import { formatDate } from "../../utils/formatDate";
 import ConfirmModal from "../ui/ConfirmModal";
-import { createComment, getCommentsByArticleId } from "../../service/comment";
+import { createComment, deleteComment, getCommentsByArticleId } from "../../service/comment";
+import type { Comment } from "../../types/types";
 
 const CommentSection = ({ articleId }: { articleId: string }) => {
 
@@ -38,6 +39,7 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
         try {
             await createComment(text, articleId)
             setText("")
+            window.location.reload()
         }
         catch (err: any) {
             setFormError(err.message ? err.message : "Could not delete the comment.")
@@ -50,11 +52,14 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
     const confirmDelete = async () => {
         if (!target) return;
         setDeleting(true);
+
         try {
+            await deleteComment(target._id)
             setTarget(null);
+            window.location.reload()
         }
-        catch (err) {
-            //   setFormError(errMsg(err, "Could not delete the comment."));
+        catch (err: any) {
+            setFormError(err.message ? err.message : "Could not delete the comment.")
             setTarget(null);
         }
         finally {
@@ -68,13 +73,13 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
                 Comments <span className="text-slate-500"></span>
             </h2>
 
-            <form className="mt-6">
+            <form onSubmit={submit} className="mt-6">
                 <label htmlFor="comment" className="sr-only">Add a comment</label>
                 <textarea
                     id="comment"
                     rows={3}
-                    value={""}
-                    onChange={() => { }}
+                    value={text}
+                    onChange={(e) => { setText(e.target.value); setFormError("")}}
                     placeholder="Share your thoughts..."
                     className="w-full rounded-xl border border-white/10 bg-field px-4 py-3.5 text-base text-white placeholder-slate-500 outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
                 />

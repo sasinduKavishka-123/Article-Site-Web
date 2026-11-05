@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import Spinner from "../ui/Spinner";
 import { formatDate } from "../../utils/formatDate";
+import ConfirmModal from "../ui/ConfirmModal";
+import { createComment, getCommentsByArticleId } from "../../service/comment";
 
 const CommentSection = ({ articleId }: { articleId: string }) => {
 
@@ -15,6 +17,50 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string>("")
     const [comments, setComments] = useState<any[]>([])
+
+    useEffect(()=>{
+        if(articleId){
+            getCommentsByArticleId(articleId)
+                .then(setComments)
+                .catch((err) => setError(err.message ? err.message : "Failed to load article"))
+                .finally(() => { setLoading(false) })
+        }
+    }, [articleId])
+
+    const submit = async (e: FormEvent) => {
+        e.preventDefault()
+        if (!text.trim()) {
+            return setFormError("Write a comment first.")
+        }
+        setPosting(true)
+        setFormError("")
+
+        try {
+            await createComment(text, articleId)
+            setText("")
+        }
+        catch (err: any) {
+            setFormError(err.message ? err.message : "Could not delete the comment.")
+        }
+        finally {
+            setPosting(false)
+        }
+    }
+
+    const confirmDelete = async () => {
+        if (!target) return;
+        setDeleting(true);
+        try {
+            setTarget(null);
+        }
+        catch (err) {
+            //   setFormError(errMsg(err, "Could not delete the comment."));
+            setTarget(null);
+        }
+        finally {
+            setDeleting(false);
+        }
+    };
 
     return (
         <section className="rounded-3xl border border-white/10 bg-card p-6 sm:p-10">
@@ -57,7 +103,7 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
                                 <li key={c._id} className="py-5">
                                     <div className="flex items-center justify-between gap-3">
                                         <p className="text-sm">
-                                            <span className="font-bold">{c.author.username}</span>
+                                            <span className="font-bold">{c.author.name}</span>
                                             <span className="ml-2 text-slate-500">{formatDate(c.createdAt)}</span>
                                         </p>
                                         {canDelete && (
@@ -66,13 +112,23 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
                                             </button>
                                         )}
                                     </div>
-                                    <p className="mt-2 whitespace-pre-wrap break-words text-slate-300">{c.commentText}</p>
+                                    <p className="mt-2 whitespace-pre-wrap break-words text-slate-300">{c.text}</p>
                                 </li>
                             );
                         })}
                     </ul>
                 )}
             </div>
+
+            <ConfirmModal
+                open={!!target}
+                title="Delete comment?"
+                message="This comment will be removed from the article."
+                confirmText="Delete"
+                busy={deleting}
+                onConfirm={confirmDelete}
+                onCancel={() => setTarget(null)}
+            />
         </section>
     )
 }

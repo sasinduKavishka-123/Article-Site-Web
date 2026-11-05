@@ -8,6 +8,7 @@ import ArticleHero from "../components/articles/ArticleHero"
 import LikeButton from "../components/articles/LikeButton"
 import { useAuth } from "../hooks/useAuth"
 import ConfirmModal from "../components/ui/ConfirmModal"
+import CommentSection from "../components/comments/commentSection"
 
 const ArticlesDetails = () => {
 
@@ -86,6 +87,8 @@ const ArticlesDetails = () => {
                     {article.content}
                 </div>
             </article>
+
+            <CommentSection articleId={article._id} />
 
             <ConfirmModal
                 open={confirm}

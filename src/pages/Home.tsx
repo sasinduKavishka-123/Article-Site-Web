@@ -21,7 +21,6 @@ export default function Home() {
     const [error, setError] = useState<string>("")
 
     const [params, setParams] = useSearchParams()
-    // const page = Number(params.get("page")) || 1
     const tag = params.get("tag") ?? ""
     const q = params.get("q") ?? ""
 
@@ -49,10 +48,6 @@ export default function Home() {
         setParams(p, { replace: true });
     }
 
-    // const {data, loading, error} = useFetch(
-    //     () => articleApi
-    // )
-
     return (
         <div>
             <section className="py-8 text-center sm:py-14">
@@ -64,11 +59,18 @@ export default function Home() {
                 <h1 className="mx-auto mt-4 max-w-3xl text-5xl font-extrabold leading-[1.05] tracking-tighter sm:text-7xl">
                     Find your next read.
                 </h1>
-                <p className="mx-auto mt-5 max-w-xl text-lg text-slate-400">
-                    Reviews, news and guides written by the community. Search by title, game or tag.
+                <p className="flex flex-col mx-auto mt-5 max-w-xl text-lg text-slate-400">
+                    <span>Reviews, news and guides written by the community.</span>
+                    <span>Search by game or tag.</span>
                 </p>
                 <div className="mt-8 flex items-center justify-center">
-                    <SearchBar value={q} onChange={(v) => update({ q: v, page: "" })} placeholder="Search by title, game, or tag..." />
+                    <SearchBar 
+                        value={q} 
+                        onChange={
+                            (v) => update({ q: v, page: "" })
+                        } 
+                        placeholder="Search by game or tag ..." 
+                    />
                 </div>
             </section>
 
@@ -77,7 +79,7 @@ export default function Home() {
                     <span className="h-0.5 w-6 bg-accent" />
                     {tag ? `Tagged "${tag}"` : "Latest"}
                 </p>
-                <h2 className="mt-2 mb-6 text-4xl font-extrabold tracking-tighter">Newest articles</h2>
+                <h2 className="mt-2 mb-6 text-4xl font-extrabold tracking-tighter">Newest Articles</h2>
 
                 {loading && !articles ? (
                     <Spinner />

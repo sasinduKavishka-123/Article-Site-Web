@@ -9,6 +9,7 @@ import type { Comment } from "../../types/types";
 const CommentSection = ({ articleId }: { articleId: string }) => {
 
     const { user } = useAuth();
+    const hasAdmin = user?.roles.some((r: string) => r === "ADMIN")
 
     const [text, setText] = useState<string>("")
     const [posting, setPosting] = useState<boolean>(false)
@@ -103,7 +104,7 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
                 ) : (
                     <ul className="divide-y divide-white/5">
                         {comments.map((c) => {
-                            const canDelete = user && (user.id === c.author._id || user.role === "admin");
+                            const canDelete = user && (user.id === c.author._id || hasAdmin);
                             return (
                                 <li key={c._id} className="py-5">
                                     <div className="flex items-center justify-between gap-3">

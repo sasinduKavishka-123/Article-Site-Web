@@ -64,17 +64,20 @@ const ArticlesDetails = () => {
             </nav>
 
             <ArticleHero article={article}>
-                <LikeButton articleId={article._id} initialLikes={article.likes} />
-                {isOwner && (
-                    <div className="flex gap-3">
-                        <Link to={`/articles/${article._id}/edit`} className="flex-1 rounded-xl border border-white/10 px-5 py-3 text-center font-semibold hover:bg-white/5">
-                            Edit
-                        </Link>
-                        <button type="button" onClick={() => { setConfirm(true) }} className="flex-1 rounded-xl border border-red-500/30 px-5 py-3 font-semibold text-red-400 hover:bg-red-500/10">
-                            Delete
-                        </button>
-                    </div>
-                )}
+                {isOwner
+                    ? (
+                        <div className="flex gap-3">
+                            <Link to={`/articles/${article._id}/edit`} className="flex-1 rounded-xl border border-white/10 px-5 py-3 text-center font-semibold hover:bg-white/5">
+                                Edit
+                            </Link>
+                            <button type="button" onClick={() => { setConfirm(true) }} className="flex-1 rounded-xl border border-red-500/30 px-5 py-3 font-semibold text-red-400 hover:bg-red-500/10">
+                                Delete
+                            </button>
+                        </div>
+                    )
+                    :
+                    (<LikeButton articleId={article._id} initialLikes={article.likes} />)}
+
                 {actionError && <p role="alert" className="text-sm text-red-400">{actionError}</p>}
             </ArticleHero>
             <article className="rounded-3xl border border-white/10 bg-card p-6 sm:p-10">

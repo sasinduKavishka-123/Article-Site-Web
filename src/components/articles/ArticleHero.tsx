@@ -16,7 +16,7 @@ const ArticleHero = ({ article, children }: { article: Article, children?: React
                 />
             )}
             <div className="absolute inset-0 bg-linear-to-r from-card/95 to-card/50" />
-            <div className="relative grid gap-8 p-6 md:grid-cols-[2fr_3fr] md:p-10">
+            <div className="relative grid gap-6 p-6 md:grid-cols-[2fr_3fr] md:p-10">
                 <CoverImage
                     src={article.coverImageUrl}
                     alt={`Cover for ${article.title}`}

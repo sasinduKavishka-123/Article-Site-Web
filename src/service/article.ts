@@ -27,11 +27,16 @@ export const updateArticle = async (formData: FormData) => {
     const res = await api.put(`/articles`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
     })
-    
+
     return res.data
 }
 
 export const changeActive = async (id: string) => {
     const res = await api.patch(`/articles/${id}/change-activ`)
-    return res
+    return res.data
+}
+
+export const toggleLike = async (id: string) => {
+    const res = await api.patch(`/articles/${id}/like`)
+    return res.data
 }

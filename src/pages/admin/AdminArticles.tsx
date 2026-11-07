@@ -8,6 +8,7 @@ import { formatDate } from "../../utils/formatDate";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import StatusBadge from "../../components/ui/StatusBadge";
 import { changeActive, getAllAdminArticles, getAllArticles } from "../../service/article";
+import Pagination from "../../components/ui/Pagination";
 
 
 const Filters: { value: StatusFilter; label: string }[] = [
@@ -15,6 +16,8 @@ const Filters: { value: StatusFilter; label: string }[] = [
     { value: "active", label: "Active" },
     { value: "inactive", label: "Inactive" }
 ]
+
+const PAGE_LIMIT = 3
 
 const AdminArticles = () => {
 
@@ -28,14 +31,14 @@ const AdminArticles = () => {
     const [articles, setArticles] = useState<Article[]>([])
 
     useEffect(() => {
-        fetchArticles("all")
+        fetchArticles(status)
     }, [page])
 
     const fetchArticles = (s: StatusFilter) => {
         setLoading(true)
 
         if (s === "all") {
-            getAllAdminArticles(page, 10)
+            getAllAdminArticles(page, PAGE_LIMIT)
                 .then((res) => {
                     setArticles(res.data)
                     setTotalPages(res.meta.totalPages)
@@ -48,7 +51,7 @@ const AdminArticles = () => {
         }
         else {
             const isActive = s === "active"
-            getAllArticles(page, 10, isActive)
+            getAllArticles(page, PAGE_LIMIT, isActive)
                 .then((res) => {
                     setArticles(res.data)
                     setTotalPages(res.meta.totalPages)
@@ -149,6 +152,7 @@ const AdminArticles = () => {
                                 </tbody>
                             </table>
                         </div>
+                        <Pagination page={page} pages={totalPages} onChange={(p) => setPage(p)} />
                     </>
                 )}
             </div>

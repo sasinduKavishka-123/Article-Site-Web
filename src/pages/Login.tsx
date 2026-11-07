@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { login } from "../service/auth"
 import AuthLayout, { ErrorBanner, Field, SubmitButton } from "../components/AuthLayout";
 
@@ -16,7 +16,6 @@ type LoginErrors = Partial<Record<keyof LoginForm, string>>
 
 function Login() {
 
-    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState<LoginErrors>({});
@@ -68,7 +67,7 @@ function Login() {
             footer={
                 <>
                     New here?{" "}
-                    <Link to="/register" className="font-bold text-[#14b8f6] hover:underline">
+                    <Link to="/register" className="font-bold text-accent hover:underline">
                         Create an Account
                     </Link>
                 </>

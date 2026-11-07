@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TagPill from "../../components/ui/TagPill";
 import type { Article, StatusFilter } from "../../types/types"
 import Spinner from "../../components/ui/Spinner";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/formatDate";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import StatusBadge from "../../components/ui/StatusBadge";
+import { getAllArticles } from "../../service/article";
 
 
 const Filters: { value: StatusFilter; label: string }[] = [
@@ -19,11 +20,30 @@ const AdminArticles = () => {
 
     const [status, setStatus] = useState<StatusFilter>("all")
     const [page, setPage] = useState<number>(1)
+    const [totalPages, setTotalPages] = useState<number>(1)
     const [target, setTarget] = useState<Article | null>(null)
     const [busy, setBusy] = useState<boolean>(false)
     const [error, setError] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(true)
-    const [articles, SetArticles] = useState<Article[]>([])
+    const [articles, setArticles] = useState<Article[]>([])
+
+    useEffect(() => {
+        fetchArticles()
+    }, [page])
+
+    const fetchArticles = () => {
+        setLoading(true)
+        getAllArticles(page, 10)
+            .then((res) => {
+                setArticles(res.data)
+                setTotalPages(res.meta.totalPages)
+            })
+            .catch((err) => {
+                console.error(err)
+                setError(err.message? err.message : "Internal Server Error")
+            })
+            .finally(() => setLoading(false))
+    }
 
     const changeStatus = (s: StatusFilter) => {
         setStatus(s);
@@ -36,6 +56,10 @@ const AdminArticles = () => {
 
     const restore = async (a: Article) => {
 
+    }
+
+    if(loading){
+        return <Spinner/>
     }
 
     return (

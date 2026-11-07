@@ -10,6 +10,7 @@ import ArticlesDetails from "../pages/ArticleDetails";
 import CreateArticle from "../pages/CreateArticle";
 import EditArticle from "../pages/EditArticle";
 import AdminLayout from "../pages/admin/AdminLayout";
+import Overview from "../pages/admin/Overview";
 
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] }
@@ -68,11 +69,13 @@ export default function AppRouter() {
                     <Route
                         path="/admin"
                         element={
-                            <RequireAuth>
+                            <RequireAuth roles={["ADMIN"]}>
                                 <AdminLayout />
                             </RequireAuth>
                         }
-                    />
+                    >
+                        <Route index element={<Overview/>}/>
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -16,7 +16,7 @@ const MostLikedList = ({ items }: { items: Article[] }) => {
                         src={a.coverImageUrl} alt="" className="h-14 w-24 shrink-0 rounded-lg"
                     />
                     <div className="min-w-0 flex-1">
-                        <Link to={`/atricles/${a._id}`} className="line-clamp-1 font-bold hover:text-accent">{a.title}</Link>
+                        <Link to={`/articles/${a._id}`} className="line-clamp-1 font-bold hover:text-accent">{a.title}</Link>
                         <p className="truncate text-sm text-slate-400"> by {a.author.name}</p>
                     </div>
                     <span className="font-bold text-accent">♥ {a.likes.length}</span>

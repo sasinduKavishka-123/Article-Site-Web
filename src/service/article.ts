@@ -45,3 +45,8 @@ export const getAllArticleCount = async()=>{
     const res = await api.get('/articles/countAll')
     return res.data
 }
+
+export const getMostLikedArticles = async()=>{
+    const res = await api.get("/articles/getMostLiked")
+    return res.data
+}

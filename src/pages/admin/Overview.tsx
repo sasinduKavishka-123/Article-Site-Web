@@ -3,29 +3,49 @@ import MostLikedList from "../../components/admin/MostLikedList"
 import StatCard from "../../components/admin/StatCard"
 import TagBars from "../../components/admin/TagBars"
 import { getAllUserCount } from "../../service/auth"
-import { getAllArticleCount } from "../../service/article"
+import { getAllArticleCount, getMostLikedArticles } from "../../service/article"
 import { getAllCommentsCount } from "../../service/comment"
+import Spinner from "../../components/ui/Spinner"
+import type { Article } from "../../types/types"
 
 const Overview = () => {
 
-    const[userCount, setUserCount] = useState<number>(0)
-    const[articleCount, setArticleCount] = useState<number>(0)
-    const[commentCount, setCommentCount] = useState<number>(0)
-    const[error, setError] = useState<string>("")
+    const [userCount, setUserCount] = useState<number>(0)
+    const [articleCount, setArticleCount] = useState<number>(0)
+    const [commentCount, setCommentCount] = useState<number>(0)
 
-    useEffect(()=>{
-        getAllUserCount().then(
-            setUserCount
-        ).catch((err)=> setError(err))
+    const [articles, setArticles] = useState<Article[]>([])
 
-        getAllArticleCount().then(
-            setArticleCount
-        ).catch((err)=> setError(err))
-        
-        getAllCommentsCount().then(
-            setCommentCount
-        ).catch((err)=> setError(err))
+    const [error, setError] = useState<string>("")
+    const [loading, setLoading] = useState<boolean>(true)
+
+    useEffect(() => {
+
+        getAllUserCount()
+            .then(setUserCount)
+            .catch((err) => setError(err))
+
+        getAllArticleCount()
+            .then(setArticleCount)
+            .catch((err) => setError(err))
+
+        getAllCommentsCount()
+            .then(setCommentCount)
+            .catch((err) => setError(err))
+
+        getMostLikedArticles()
+            .then(setArticles)
+            .catch((err) => setError(err))
+            .finally(() => setLoading(false))
+
+        if (error) {
+            alert(error)
+        }
     }, [])
+
+    if (loading) {
+        return <Spinner />
+    }
 
     return (
         <div className="space-y-8">
@@ -38,11 +58,11 @@ const Overview = () => {
             <div className="grid gap-6 lg:grid-cols-2">
                 <section className="rounded-3xl border border-white/10 bg-card sm:p-8">
                     <h2 className="mb-6 text-2xl font-extrabold tracking-tighter">Most Liked Articles</h2>
-                    <MostLikedList items={[ ]}/>
+                    <MostLikedList items={articles} />
                 </section>
                 <section className="rounded-3xl border border-white/10 bg-card p-6 sm:p-8">
                     <h2 className="mb-6 text-2xl font-extrabold tracking-tighter">Articles per tag</h2>
-                    <TagBars items={[]}/>
+                    <TagBars items={[]} />
                 </section>
             </div>
         </div>

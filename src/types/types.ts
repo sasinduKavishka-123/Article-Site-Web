@@ -25,3 +25,5 @@ export interface Comment {
   createdAt: string
   updatedAt: string
 }
+
+export type StatusFilter = "all" | "active" | "inactive"

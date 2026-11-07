@@ -1,7 +1,12 @@
 import api from "./api"
 
-export const getAllArticles = async (page: number, limit: number) => {
-    const res = await api.get(`/articles?page=${page}&limit=${limit}`)
+export const getAllArticles = async (page: number, limit: number, isActive: boolean) => {
+    const res = await api.get(`/articles?page=${page}&limit=${limit}&isActive=${isActive}`)
+    return res.data
+}
+
+export const getAllAdminArticles = async (page: number, limit: number) => {
+    const res = await api.get(`/articles/admin?page=${page}&limit=${limit}`)
     return res.data
 }
 

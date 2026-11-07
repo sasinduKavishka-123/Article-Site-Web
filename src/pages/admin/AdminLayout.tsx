@@ -18,7 +18,6 @@ const AdminLayout = () => {
             <nav className="mt-6 inline-flex gap-1 rounded-xl border border-white/10 bg-card p-1.5">
                 <NavLink to="/admin" end className={tab}>Overview</NavLink>
                 <NavLink to="/admin/articles" className={tab}>Articles</NavLink>
-                <NavLink to="/admin/comments" className={tab}>Comments</NavLink>
             </nav>
 
             <div className="mt-8">

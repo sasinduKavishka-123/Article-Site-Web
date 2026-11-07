@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/formatDate";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import StatusBadge from "../../components/ui/StatusBadge";
-import { getAllArticles } from "../../service/article";
+import { changeActive, getAllAdminArticles, getAllArticles } from "../../service/article";
 
 
 const Filters: { value: StatusFilter; label: string }[] = [
@@ -28,38 +28,75 @@ const AdminArticles = () => {
     const [articles, setArticles] = useState<Article[]>([])
 
     useEffect(() => {
-        fetchArticles()
+        fetchArticles("all")
     }, [page])
 
-    const fetchArticles = () => {
+    const fetchArticles = (s: StatusFilter) => {
         setLoading(true)
-        getAllArticles(page, 10)
-            .then((res) => {
-                setArticles(res.data)
-                setTotalPages(res.meta.totalPages)
-            })
-            .catch((err) => {
-                console.error(err)
-                setError(err.message? err.message : "Internal Server Error")
-            })
-            .finally(() => setLoading(false))
+
+        if (s === "all") {
+            getAllAdminArticles(page, 10)
+                .then((res) => {
+                    setArticles(res.data)
+                    setTotalPages(res.meta.totalPages)
+                })
+                .catch((err) => {
+                    console.error(err)
+                    setError(err.message ? err.message : "Internal Server Error")
+                })
+                .finally(() => setLoading(false))
+        }
+        else {
+            const isActive = s === "active"
+            getAllArticles(page, 10, isActive)
+                .then((res) => {
+                    setArticles(res.data)
+                    setTotalPages(res.meta.totalPages)
+                })
+                .catch((err) => {
+                    console.error(err)
+                    setError(err.message ? err.message : "Internal Server Error")
+                })
+                .finally(() => setLoading(false))
+        }
     }
 
     const changeStatus = (s: StatusFilter) => {
         setStatus(s);
         setPage(1);
+        fetchArticles(s)
     };
 
     const confirmDelete = async () => {
+        if (!target) return
 
+        setBusy(true)
+        try {
+            await changeActive(target._id)
+            setTarget(null)
+            fetchArticles(status)
+        }
+        catch (err: any) {
+            setError(err.message ? err.message : "Server Error")
+            setTarget(null)
+        }
+        finally {
+            setBusy(false)
+        }
     }
 
     const restore = async (a: Article) => {
-
+        try {
+            await changeActive(a._id)
+            fetchArticles(status)
+        }
+        catch (err: any) {
+            setError(err.message ? err.message : "Server Error")
+        }
     }
 
-    if(loading){
-        return <Spinner/>
+    if (loading) {
+        return <Spinner />
     }
 
     return (

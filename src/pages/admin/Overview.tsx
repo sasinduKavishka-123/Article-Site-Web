@@ -1,5 +1,6 @@
 import MostLikedList from "../../components/admin/MostLikedList"
 import StatCard from "../../components/admin/StatCard"
+import TagBars from "../../components/admin/TagBars"
 
 const Overview = () => {
     return (
@@ -18,7 +19,7 @@ const Overview = () => {
                 </section>
                 <section className="rounded-3xl border border-white/10 bg-card p-6 sm:p-8">
                     <h2 className="mb-6 text-2xl font-extrabold tracking-tighter">Articles per tag</h2>
-
+                    <TagBars items={[]}/>
                 </section>
             </div>
         </div>

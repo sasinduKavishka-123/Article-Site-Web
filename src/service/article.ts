@@ -46,12 +46,17 @@ export const toggleLike = async (id: string) => {
     return res.data
 }
 
-export const getAllArticleCount = async()=>{
+export const getAllArticleCount = async () => {
     const res = await api.get('/articles/countAll')
     return res.data
 }
 
-export const getMostLikedArticles = async()=>{
+export const getMostLikedArticles = async () => {
     const res = await api.get("/articles/getMostLiked")
+    return res.data
+}
+
+export const getArticlesPerTag = async () => {
+    const res = await api.get("/articles/per-tag")
     return res.data
 }

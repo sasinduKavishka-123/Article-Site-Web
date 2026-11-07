@@ -3,10 +3,10 @@ import MostLikedList from "../../components/admin/MostLikedList"
 import StatCard from "../../components/admin/StatCard"
 import TagBars from "../../components/admin/TagBars"
 import { getAllUserCount } from "../../service/auth"
-import { getAllArticleCount, getMostLikedArticles } from "../../service/article"
+import { getAllArticleCount, getArticlesPerTag, getMostLikedArticles } from "../../service/article"
 import { getAllCommentsCount } from "../../service/comment"
 import Spinner from "../../components/ui/Spinner"
-import type { Article } from "../../types/types"
+import type { Article, TagCount } from "../../types/types"
 
 const Overview = () => {
 
@@ -15,6 +15,7 @@ const Overview = () => {
     const [commentCount, setCommentCount] = useState<number>(0)
 
     const [articles, setArticles] = useState<Article[]>([])
+    const [tagDetails, setTagDetails] = useState<TagCount[]>([])
 
     const [error, setError] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(true)
@@ -32,6 +33,10 @@ const Overview = () => {
         getAllCommentsCount()
             .then(setCommentCount)
             .catch((err) => setError(err))
+
+        getArticlesPerTag()
+            .then(setTagDetails)
+            .catch((err)=>setError(err))
 
         getMostLikedArticles()
             .then(setArticles)
@@ -62,7 +67,7 @@ const Overview = () => {
                 </section>
                 <section className="rounded-3xl border border-white/10 bg-card p-6 sm:p-8">
                     <h2 className="mb-6 text-2xl font-extrabold tracking-tighter">Articles per tag</h2>
-                    <TagBars items={[]} />
+                    <TagBars items={tagDetails} />
                 </section>
             </div>
         </div>

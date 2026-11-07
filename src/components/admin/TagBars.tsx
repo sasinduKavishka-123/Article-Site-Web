@@ -1,8 +1,4 @@
-
-interface TagCount {
-    tag: string
-    count: number
-}
+import type { TagCount } from "../../types/types"
 
 const TagBars = ({ items }: { items: TagCount[] }) => {
     if (items.length === 0) return <p className="text-slate-400">No tags yet.</p>

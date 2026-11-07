@@ -26,4 +26,9 @@ export interface Comment {
   updatedAt: string
 }
 
+export interface TagCount {
+    tag: string
+    count: number
+}
+
 export type StatusFilter = "all" | "active" | "inactive"

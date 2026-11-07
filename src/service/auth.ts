@@ -35,3 +35,8 @@ export const refreshTockenCall = async (refreshToken: string) => {
 
     return res.data
 }
+
+export const getAllUserCount = async () => {
+    const res = await api.get("/auth/countAll")
+    return res.data
+}

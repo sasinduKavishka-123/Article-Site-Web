@@ -40,3 +40,8 @@ export const toggleLike = async (id: string) => {
     const res = await api.patch(`/articles/${id}/like`)
     return res.data
 }
+
+export const getAllArticleCount = async()=>{
+    const res = await api.get('/articles/countAll')
+    return res.data
+}

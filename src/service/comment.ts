@@ -14,3 +14,8 @@ export const deleteComment = async (commentId: string)=>{
     const res = await api.delete(`/comments/${commentId}`)
     return res.data
 }
+
+export const getAllCommentsCount = async()=>{
+    const res = await api.get('/comments/countAll')
+    return res.data
+}

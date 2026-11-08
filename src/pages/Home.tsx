@@ -19,17 +19,15 @@ export default function Home() {
 
     const [error, setError] = useState<string>("")
 
-    const [params, setParams] = useSearchParams()
-    const tag = params.get("tag") ?? ""
-    const q = params.get("q") ?? ""
+    const [text, setText] = useState<string>("")
 
     useEffect(() => {
-        fetchArticles()
+        fetchArticles("")
     }, [page])
 
-    const fetchArticles = () => {
+    const fetchArticles = (s: string) => {
         setLoading(true)
-        getAllArticles(page, 3, true)
+        getAllArticles(page, 3, true, s)
             .then((res) => {
                 setArticles(res.data)
                 setTotalPages(res.meta.totalPages)
@@ -41,10 +39,9 @@ export default function Home() {
             .finally(() => setLoading(false))
     }
 
-    const update = (next: Record<string, string>) => {
-        const p = new URLSearchParams(params);
-        Object.entries(next).forEach(([k, v]) => (v ? p.set(k, v) : p.delete(k)));
-        setParams(p, { replace: true });
+    const update = (s: string) => {
+        setText(s)
+        fetchArticles(s)
     }
 
     return (
@@ -64,20 +61,17 @@ export default function Home() {
                 </p>
                 <div className="mt-8 flex items-center justify-center">
                     <SearchBar 
-                        value={q} 
+                        value={text} 
                         onChange={
-                            (v) => update({ q: v, page: "" })
+                            (v) => update(v)
                         } 
-                        placeholder="Search by game or tag ..." 
+                        placeholder="Search by title, game or tag ..." 
                     />
                 </div>
             </section>
 
             <section className="mt-10">
-                <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
-                    <span className="h-0.5 w-6 bg-accent" />
-                    {tag ? `Tagged "${tag}"` : "Latest"}
-                </p>
+                
                 <h2 className="mt-2 mb-6 text-4xl font-extrabold tracking-tighter">Newest Articles</h2>
 
                 {loading && !articles ? (

@@ -12,8 +12,6 @@ interface LoginForm {
 
 type LoginErrors = Partial<Record<keyof LoginForm, string>>
 
-
-
 function Login() {
 
     const [email, setEmail] = useState("")
@@ -22,7 +20,7 @@ function Login() {
     const [serverError, setServerError] = useState<string>("");
     const [loading, setLoading] = useState(false)
 
-    const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+    const handleLogin = async (e: FormEvent) => {
         e.preventDefault()
 
         const err: LoginErrors = {};
@@ -32,12 +30,10 @@ function Login() {
         if (!password) { err.password = "Enter your password." }
         else if (password.length < 6) { err.password = "Password must be at least 6 characters." }
 
-
         setErrors(err)
         if (Object.keys(err).length) { return }
 
         setLoading(true)
-
         try {
             const res = await login(email.trim(), password)
             
@@ -47,7 +43,7 @@ function Login() {
 
             localStorage.setItem("ACCESS_TOKEN", access_token)
             localStorage.setItem("REFRESH_TOKEN", refresh_token)
-
+            
             window.location.href = "/"
         }
         catch (err: any) {

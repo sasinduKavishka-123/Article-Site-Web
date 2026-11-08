@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react"
 import { ErrorBanner, Field, SubmitButton } from "../AuthLayout"
 import TagInput from "./TagInput"
 import { useNavigate } from "react-router-dom";
+import ImageDropZone from "./ImageDropZone";
 
 interface ArticleData {
     title: string
@@ -27,18 +28,19 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
     const [title, setTitle] = useState<string>(data?.title ?? "")
     const [content, setContent] = useState<string>(data?.content ?? "")
     const [gameNames, setGameNames] = useState<string[]>(data?.gameNames ?? [])
+    const [file, setFile] = useState<File | null>(null)
     const [coverImageUrl, setCoverImageUrl] = useState<string>(data?.coverImageUrl ?? "")
     const [tags, setTags] = useState<string[]>(data?.tags ?? [])
     const [error, setError] = useState<Errors>({})
     const [serverError, setServerError] = useState("");
     const [loading, setLoading] = useState<boolean>(false)
+    const [uploading, setUploading] = useState<boolean>(false)
 
     const validate = (): Errors => {
-        const err: Errors = {};
-        if (!title.trim()) err.title = "Enter a title.";
-        if (!content.trim()) err.content = "Write some content.";
-        if (coverImageUrl.trim() && !/^https?:\/\/\S+$/i.test(coverImageUrl.trim()))
-            err.coverImageUrl = "Enter a valid image URL starting with http:// or https://";
+        const err: Errors = {}
+        if (!title.trim()) err.title = "Enter a title."
+        if (!content.trim()) err.content = "Write some content."
+        if (uploading) err.coverImageUrl = "Wait for the image to finish uploading."
         return err;
     };
 
@@ -78,7 +80,7 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                 }}
                 error={error.title}
             />
-            <Field
+            {/* <Field
                 id="coverImageUrl"
                 label="Cover image URL (optional)"
                 placeholder="https://example.com/cover.jpg"
@@ -88,6 +90,12 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                         (e.target.value)
                     setError((x) => ({ ...x, coverImageUrl: "" }))
                 }}
+                error={error.coverImageUrl}
+            /> */}
+            <ImageDropZone
+                value={coverImageUrl}
+                onChange={(file) => { setFile(file); setError((x) => ({ ...x, coverImageUrl: "" })) }}
+                onUploadingChange={setUploading}
                 error={error.coverImageUrl}
             />
             <TagInput

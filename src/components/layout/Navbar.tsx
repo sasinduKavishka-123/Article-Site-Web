@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, replace, useNavigate } from "react-router-dom";
 import { Logo } from "../AuthLayout";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
@@ -13,9 +13,11 @@ export default function Navbar() {
     const [open, setOpen] = useState(false);
     const [q, setQ] = useState("");
 
-    const onSearch = () => { }
-
-    const onLogout = () => { }
+    const onLogout = () => {
+        localStorage.removeItem("ACCESS_TOKEN")
+        localStorage.removeItem("REFRESH_TOKEN")
+        navigate("/login")
+     }
     
     const { user } = useAuth()
     const hasAdmin = user?.roles.some((r: string) => r === "ADMIN")
@@ -59,15 +61,6 @@ export default function Navbar() {
 
             {open && (
                 <div className="space-y-3 border-t border-white/5 px-6 py-4 md:hidden">
-                    <form onSubmit={onSearch}>
-                        <input
-                            value={q}
-                            onChange={(e) => setQ(e.target.value)}
-                            placeholder="Search articles..."
-                            aria-label="Search articles"
-                            className="w-full rounded-xl border border-white/10 bg-card px-4 py-3 text-sm text-white placeholder-slate-500 outline-none focus:border-accent"
-                        />
-                    </form>
                     <nav className="flex flex-col gap-1" aria-label="Mobile">{links}</nav>
                     <Link to="/articles/new" onClick={() => setOpen(false)} className="block rounded-xl bg-accent px-5 py-3 text-center text-sm font-bold text-[#04121c]">
                         Write article

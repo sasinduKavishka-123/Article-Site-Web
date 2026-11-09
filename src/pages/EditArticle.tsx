@@ -54,7 +54,7 @@ const EditArticle = () => {
                     formData.append("content", article.content)
                     formData.append("gameNames", JSON.stringify(article.gameNames))
                     formData.append("tags", JSON.stringify(article.tags))
-                    if (article.coverImageUrl) { formData.append("file", article.coverImageUrl) }
+                    if (article.file) { formData.append("file", article.file) }
 
                     const newArticle = await updateArticle(formData)
                     navigate(`/articles/${newArticle._id}`)

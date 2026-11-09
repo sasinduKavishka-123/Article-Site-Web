@@ -49,13 +49,14 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
         const found = validate()
         setError(found)
         if (Object.keys(found).length) return
+        
         setLoading(true)
         setServerError("")
         try {
             await onSubmit({
                 title: title,
                 content: content,
-                coverImageUrl: coverImageUrl ? coverImageUrl : "",
+                file: file ? file : "",
                 gameNames: gameNames,
                 tags: tags
             })
@@ -80,24 +81,14 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                 }}
                 error={error.title}
             />
-            {/* <Field
-                id="coverImageUrl"
-                label="Cover image URL (optional)"
-                placeholder="https://example.com/cover.jpg"
-                value={coverImageUrl}
-                onChange={(e) => {
-                    setCoverImageUrl
-                        (e.target.value)
-                    setError((x) => ({ ...x, coverImageUrl: "" }))
-                }}
-                error={error.coverImageUrl}
-            /> */}
+            
             <ImageDropZone
                 value={coverImageUrl}
                 onChange={(file) => { setFile(file); setError((x) => ({ ...x, coverImageUrl: "" })) }}
                 onUploadingChange={setUploading}
                 error={error.coverImageUrl}
             />
+
             <TagInput
                 id="gameNames"
                 label="Game names (optional)"

@@ -21,7 +21,7 @@ const CreateArticle = () => {
                     formData.append("content", data.content)
                     formData.append("gameNames", JSON.stringify(data.gameNames))
                     formData.append("tags", JSON.stringify(data.tags))
-                    if (data.coverImageUrl) { formData.append("file", data.coverImageUrl) }
+                    if (data.file) { formData.append("file", data.file) }
 
                     const newArticle = await createArticle(formData)
                     navigate(`/articles/${newArticle._id}`)

@@ -3,6 +3,7 @@ import { ErrorBanner, Field, SubmitButton } from "../AuthLayout"
 import TagInput from "./TagInput"
 import { useNavigate } from "react-router-dom";
 import ImageDropZone from "./ImageDropZone";
+import AiTextGenerator from "./AiTextGenerator";
 
 interface ArticleData {
     title: string
@@ -36,6 +37,10 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [uploading, setUploading] = useState<boolean>(false)
 
+    const [aiText, setAiText] = useState<string>("")
+    const [generating, setGenerating] = useState<boolean>(false)
+    const [aiError, setAiError] = useState<string>("")
+
     const validate = (): Errors => {
         const err: Errors = {}
         if (!title.trim()) err.title = "Enter a title."
@@ -44,12 +49,16 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
         return err;
     };
 
+    const handelGenerate = async () => { 
+        
+    }
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const found = validate()
         setError(found)
         if (Object.keys(found).length) return
-        
+
         setLoading(true)
         setServerError("")
         try {
@@ -81,7 +90,7 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                 }}
                 error={error.title}
             />
-            
+
             <ImageDropZone
                 value={coverImageUrl}
                 onChange={(file) => { setFile(file); setError((x) => ({ ...x, coverImageUrl: "" })) }}
@@ -124,6 +133,16 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                 />
                 {error.content && <p className="mt-2 text-sm text-red-400">{error.content}</p>}
             </div>
+
+            <AiTextGenerator
+                title={title}
+                value={aiText}
+                onChange={setAiText}
+                onGenerate={handelGenerate}
+                generating={false}
+                error={aiError}
+            />
+
             <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                 <button type="button" onClick={() => navigate(-1)} className="rounded-xl border border-white/10 px-6 py-3.5 font-semibold hover:bg-white/5">
                     Cancel

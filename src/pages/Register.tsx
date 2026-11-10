@@ -63,7 +63,7 @@ function Register() {
         <AuthLayout
             eyebrow="Join the community"
             title={"Create your account."}
-            subtitle={"Publish reviews, guides and news"}
+            subtitle={"Read about games, learn game development and publish your own articles."}
             footer={
                 <>
                     Already have an account?{" "}

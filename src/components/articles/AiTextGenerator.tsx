@@ -1,4 +1,3 @@
-import { title } from "process"
 
 interface Props {
     title: string
@@ -41,7 +40,7 @@ const AiTextGenerator = ({ title, value, onChange, onGenerate, generating, error
 
             <textarea
                 id="aiText"
-                rows={10}
+                rows={12}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 aria-describedby="aiText-hint"

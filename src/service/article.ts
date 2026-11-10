@@ -5,7 +5,7 @@ export const getAllArticles = async (page: number, limit: number, isActive: bool
     return res.data
 }
 
-export const getAllAdminArticles = async (page: number, limit: number, text:string) => {
+export const getAllAdminArticles = async (page: number, limit: number, text: string) => {
     const res = await api.get(`/articles/admin?page=${page}&limit=${limit}&search=${text}`)
     return res.data
 }
@@ -58,5 +58,10 @@ export const getMostLikedArticles = async () => {
 
 export const getArticlesPerTag = async () => {
     const res = await api.get("/articles/per-tag")
+    return res.data
+}
+
+export const generateAiDescription = async (title: string) => {
+    const res = await api.post('/articles/generate-description', {title})
     return res.data
 }

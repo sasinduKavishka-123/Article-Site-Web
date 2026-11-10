@@ -58,8 +58,8 @@ function Login() {
     return (
         <AuthLayout
             eyebrow="Welcome back"
-            title="Log in to your account."
-            subtitle="Read, write and discuss the latest game articles."
+            title="Pick up where you left off."
+            subtitle="Read about games and learn new techniques. "
             footer={
                 <>
                     New here?{" "}

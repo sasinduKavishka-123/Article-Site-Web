@@ -4,6 +4,7 @@ import TagInput from "./TagInput"
 import { useNavigate } from "react-router-dom";
 import ImageDropZone from "./ImageDropZone";
 import AiTextGenerator from "./AiTextGenerator";
+import { generateAiDescription } from "../../service/article";
 
 interface ArticleData {
     title: string
@@ -49,8 +50,27 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
         return err;
     };
 
-    const handelGenerate = async () => { 
-        
+    const handelGenerateText = async () => {
+        if (!title.trim()){
+            return setAiError("Title is required for AI Synthesis.")
+        }
+
+        if (title.trim().length > 30){
+            return setAiError("Title is too long.")
+        }
+
+        setGenerating(true)
+
+        try{
+            const res = await generateAiDescription(title)
+            setAiText(res.description)
+        }
+        catch{
+            setAiError("AI Summary generation failed.")
+        }
+        finally{
+            setGenerating(false)
+        }
     }
 
     const handleSubmit = async (e: FormEvent) => {
@@ -138,8 +158,8 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                 title={title}
                 value={aiText}
                 onChange={setAiText}
-                onGenerate={handelGenerate}
-                generating={false}
+                onGenerate={handelGenerateText}
+                generating={generating}
                 error={aiError}
             />
 

@@ -49,15 +49,16 @@ export default function Home() {
             <section className="py-8 text-center sm:py-14">
                 <p className="flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
                     <span className="h-0.5 w-1.5 bg-accent" />
-                    Game articles &amp; reviews
+                    Games &amp; game development
                     <span className="h-0.5 w-1.5 bg-accent" />
                 </p>
-                <h1 className="mx-auto mt-4 max-w-3xl text-5xl font-extrabold leading-[1.05] tracking-tighter sm:text-7xl">
-                    Find your next read.
+                <h1 className="flex flex-col mx-auto mt-4 max-w-3xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-7xl">
+                    <span>Play it , Build it </span>
+                    <span>Talk about it</span>
                 </h1>
                 <p className="flex flex-col mx-auto mt-5 max-w-xl text-lg text-slate-400">
-                    <span>Reviews, news and guides written by the community.</span>
-                    <span>Search by game or tag.</span>
+                    <span>Read about the games you love and</span>
+                    <span> learn how to make your own from the community’s guides.</span>
                 </p>
                 <div className="mt-8 flex items-center justify-center">
                     <SearchBar 

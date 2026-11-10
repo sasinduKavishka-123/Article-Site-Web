@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-slate-400">
-            A community for game reviews, news and guides. Read, write and talk about the games you love.
+            A community for players and game makers. Read about the games you love, learn game development techniques and share your own how-to guides.
           </p>
         </div>
         <div>
@@ -27,7 +27,7 @@ export default function Footer() {
       </div>
       <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 border-t border-white/5 px-6 py-6 text-sm text-slate-500">
         <span>© {new Date().getFullYear()} GameHub.</span>
-        <span>Built with the MERN stack.</span>
+        <span>Made for gamers and game developers.</span>
       </div>
     </footer>
   );

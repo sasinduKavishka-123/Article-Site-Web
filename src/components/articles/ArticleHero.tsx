@@ -12,7 +12,7 @@ const ArticleHero = ({ article, children }: { article: Article, children?: React
                     src={article.coverImageUrl}
                     alt=""
                     aria-hidden="true"
-                    className="absolute inset-0 h-full w-full scale-110 object-cover opacity-25 blur-2xl"
+                    className="absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-[2px]"
                 />
             )}
             <div className="absolute inset-0 bg-linear-to-r from-card/95 to-card/50" />

@@ -31,7 +31,7 @@ const MyArticles = () => {
                     </p>
                     <h1 className="mt-2 text-4xl font-extrabold tracking-tighter sm:text-5xl">My Articles</h1>
                 </div>
-                <Link to="/article/new" className="rounded-xl bg-accent px-5 py-3 font-bold text-[#04121c] hover:bg-[#3cc6fa]">
+                <Link to="/articles/new" className="rounded-xl bg-accent px-5 py-3 font-bold text-[#04121c] hover:bg-[#3cc6fa]">
                     Write article
                 </Link>
             </div>

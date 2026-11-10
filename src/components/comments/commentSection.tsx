@@ -71,7 +71,7 @@ const CommentSection = ({ articleId }: { articleId: string }) => {
     return (
         <section className="rounded-3xl border border-white/10 bg-card p-6 sm:p-10">
             <h2 id="comments-title" className="text-3xl font-extrabold tracking-tighter">
-                Comments <span className="text-slate-500"></span>
+                Comments <span className="text-slate-500"> {"  ("} {comments.length} {"  )"}</span>
             </h2>
 
             <form onSubmit={submit} className="mt-6">

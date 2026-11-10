@@ -11,7 +11,6 @@ export default function Navbar() {
 
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    const [q, setQ] = useState("");
 
     const onLogout = () => {
         localStorage.removeItem("ACCESS_TOKEN")
@@ -37,13 +36,14 @@ export default function Navbar() {
         <header className="sticky top-0 z-40 border-b border-white/5 bg-base/90 backdrop-blur">
             <div className="mx-auto flex h-20 max-w-6xl items-center gap-4 px-6">
                 <Logo />
-                <nav className="ml-4 hidden items-center gap-1 md:flex" aria-label="Main">{links}</nav>
 
-                <div className="ml-auto hidden items-center gap-3 md:flex">
+                <nav className="ml-4 hidden items-center gap-1 min-[850px]:flex " aria-label="Main">{links}</nav>
+
+                <div className="ml-auto hidden items-center gap-3 min-[850px]:flex">
                     <Link to="/articles/new" className="rounded-xl bg-accent px-5 py-2.5 text-sm font-bold text-[#04121c] hover:bg-[#3cc6fa]">
                         Write article
                     </Link>
-                    <span className="max-w-[8rem] truncate text-sm text-slate-400" title={user?.email}>{user?.name}</span>
+                    
                     <button type="button" onClick={onLogout} className="rounded-xl border border-white/10 px-4 py-2.5 text-sm font-semibold hover:bg-white/5">
                         Log out
                     </button>
@@ -54,20 +54,21 @@ export default function Navbar() {
                     onClick={() => setOpen((o) => !o)}
                     aria-expanded={open}
                     aria-label="Toggle menu"
-                    className="ml-auto rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold md:hidden"
+                    className="ml-auto rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold min-[850px]:hidden"
                 >
                     {open ? "Close" : "Menu"}
                 </button>
             </div>
 
             {open && (
-                <div className="space-y-3 border-t border-white/5 px-6 py-4 md:hidden">
+                <div className="space-y-3 border-t border-white/5 px-6 py-4 min-[850px]:hidden">
                     <nav className="flex flex-col gap-1" aria-label="Mobile">{links}</nav>
                     <Link to="/articles/new" onClick={() => setOpen(false)} className="block rounded-xl bg-accent px-5 py-3 text-center text-sm font-bold text-[#04121c]">
                         Write article
                     </Link>
+
                     <button type="button" onClick={onLogout} className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm font-semibold">
-                        Log out ({/*user?.username*/})
+                        Log out
                     </button>
                 </div>
             )}

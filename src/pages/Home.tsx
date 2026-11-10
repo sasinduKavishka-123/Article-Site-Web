@@ -26,7 +26,7 @@ export default function Home() {
 
     const fetchArticles = (s: string) => {
         setLoading(true)
-        getAllArticles(page, 3, true, s)
+        getAllArticles(page, 6, true, s)
             .then((res) => {
                 setArticles(res.data)
                 setTotalPages(res.meta.totalPages)

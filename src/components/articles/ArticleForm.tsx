@@ -87,7 +87,8 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                 content: content,
                 file: file ? file : "",
                 gameNames: gameNames,
-                tags: tags
+                tags: tags,
+                coverImageUrl: coverImageUrl
             })
         }
         catch (err: any) {
@@ -113,7 +114,13 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
 
             <ImageDropZone
                 value={coverImageUrl}
-                onChange={(file) => { setFile(file); setError((x) => ({ ...x, coverImageUrl: "" })) }}
+                onChange={(file) => { 
+                    setFile(file)
+                    setError((x) => ({ ...x, coverImageUrl: "" }))
+                    if(!file){
+                        setCoverImageUrl("")
+                    }
+                }}
                 onUploadingChange={setUploading}
                 error={error.coverImageUrl}
             />

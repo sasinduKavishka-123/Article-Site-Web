@@ -83,7 +83,7 @@ const ArticlesDetails = () => {
             </ArticleHero>
             <article className="rounded-3xl border border-white/10 bg-card p-6 sm:p-10">
                 <h2 className="text-3xl font-extrabold tracking-normal">Article</h2>
-                <div className="mt-5 max-w-3xl whitespace-pre-wrap wrap-break-word text-lg leading-8 text-slate-300">
+                <div className="mt-5 w-full whitespace-pre-wrap break-words text-base leading-7 text-slate-300">
                     {article.content}
                 </div>
             </article>

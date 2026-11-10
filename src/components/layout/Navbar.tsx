@@ -25,6 +25,7 @@ export default function Navbar() {
     const links = (
         <>
             <NavLink to="/" end className={linkClass} onClick={() => setOpen(false)}>Home</NavLink>
+            <NavLink to="/top-articles" className={linkClass} onClick={() => setOpen(false)}>Top Articles</NavLink>
             <NavLink to="/my-articles" className={linkClass} onClick={() => setOpen(false)}>My Articles</NavLink>
             {hasAdmin && (
                 <NavLink to="/admin" className={linkClass} onClick={() => setOpen(false)}>Admin</NavLink>
@@ -42,7 +43,7 @@ export default function Navbar() {
                     <Link to="/articles/new" className="rounded-xl bg-accent px-5 py-2.5 text-sm font-bold text-[#04121c] hover:bg-[#3cc6fa]">
                         Write article
                     </Link>
-                    {/* <span className="max-w-[8rem] truncate text-sm text-slate-400" title={user?.email}>{user?.username}</span> */}
+                    <span className="max-w-[8rem] truncate text-sm text-slate-400" title={user?.email}>{user?.name}</span>
                     <button type="button" onClick={onLogout} className="rounded-xl border border-white/10 px-4 py-2.5 text-sm font-semibold hover:bg-white/5">
                         Log out
                     </button>

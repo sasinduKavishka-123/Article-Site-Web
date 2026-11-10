@@ -51,8 +51,13 @@ export const getAllArticleCount = async () => {
     return res.data
 }
 
-export const getMostLikedArticles = async () => {
-    const res = await api.get("/articles/getMostLiked")
+export const getMostLikedArticlesAdmin = async () => {
+    const res = await api.get("/articles/admin-getMostLiked")
+    return res.data
+}
+
+export const getMostLikedArticles = async (page: number, limit: number) => {
+    const res = await api.get(`/articles/getMostLiked?page=${page}&limit=${limit}`)
     return res.data
 }
 

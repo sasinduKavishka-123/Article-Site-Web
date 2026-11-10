@@ -3,7 +3,7 @@ import MostLikedList from "../../components/admin/MostLikedList"
 import StatCard from "../../components/admin/StatCard"
 import TagBars from "../../components/admin/TagBars"
 import { getAllUserCount } from "../../service/auth"
-import { getAllArticleCount, getArticlesPerTag, getMostLikedArticles } from "../../service/article"
+import { getAllArticleCount, getArticlesPerTag, getMostLikedArticlesAdmin } from "../../service/article"
 import { getAllCommentsCount } from "../../service/comment"
 import Spinner from "../../components/ui/Spinner"
 import type { Article, TagCount } from "../../types/types"
@@ -38,7 +38,7 @@ const Overview = () => {
             .then(setTagDetails)
             .catch((err)=>setError(err))
 
-        getMostLikedArticles()
+        getMostLikedArticlesAdmin()
             .then(setArticles)
             .catch((err) => setError(err))
             .finally(() => setLoading(false))

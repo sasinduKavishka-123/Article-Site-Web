@@ -12,6 +12,7 @@ import EditArticle from "../pages/EditArticle";
 import AdminLayout from "../pages/admin/AdminLayout";
 import Overview from "../pages/admin/Overview";
 import AdminArticles from "../pages/admin/AdminArticles";
+import TopArticles from "../pages/TopArticles";
 
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] }
@@ -63,6 +64,7 @@ export default function AppRouter() {
                     <Route path="/" element={<Home />} />
                     <Route path="/articles/:id" element={<ArticlesDetails />} />
                     <Route path="/my-articles" element={<MyArticles />} />
+                    <Route path="/top-articles" element={<TopArticles />} />
                     <Route path="/articles/new" element={<CreateArticle />} />
                     <Route path="/articles/:id/edit" element={<EditArticle />} />
 

@@ -1,4 +1,3 @@
-import { useSearchParams } from "react-router-dom"
 import SearchBar from "../components/ui/SearchBar"
 import Spinner from "../components/ui/Spinner"
 import EmptyState from "../components/ui/EmptyState"

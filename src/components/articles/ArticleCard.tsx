@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import CoverImage from "../ui/CoverImage";
-import type React from "react";
 import TagPill from "../ui/TagPill";
 import type { Article } from "../../types/types";
 import { formatDate } from "../../utils/formatDate";

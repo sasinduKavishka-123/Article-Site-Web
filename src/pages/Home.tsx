@@ -3,14 +3,12 @@ import Spinner from "../components/ui/Spinner"
 import EmptyState from "../components/ui/EmptyState"
 import Pagination from "../components/ui/Pagination"
 import ArticleCard from "../components/articles/ArticleCard"
-import { useAuth } from "../hooks/useAuth"
 import { useEffect, useState } from "react"
 import { getAllArticles } from "../service/article"
 import type { Article } from "../types/types"
 
 export default function Home() {
 
-    const {user} = useAuth()
     const [articles, setArticles] = useState<Article[]>()
     const [loading, setLoading] = useState<boolean>(true)
     const [page, setPage] = useState<number>(1)

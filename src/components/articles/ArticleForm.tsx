@@ -36,7 +36,6 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
     const [error, setError] = useState<Errors>({})
     const [serverError, setServerError] = useState("");
     const [loading, setLoading] = useState<boolean>(false)
-    const [uploading, setUploading] = useState<boolean>(false)
 
     const [aiText, setAiText] = useState<string>("")
     const [generating, setGenerating] = useState<boolean>(false)
@@ -46,7 +45,6 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
         const err: Errors = {}
         if (!title.trim()) err.title = "Enter a title."
         if (!content.trim()) err.content = "Write some content."
-        if (uploading) err.coverImageUrl = "Wait for the image to finish uploading."
         return err;
     };
 
@@ -121,7 +119,6 @@ const ArticleForm = ({ data, submitText, loadingText, onSubmit }: Props) => {
                         setCoverImageUrl("")
                     }
                 }}
-                onUploadingChange={setUploading}
                 error={error.coverImageUrl}
             />
 

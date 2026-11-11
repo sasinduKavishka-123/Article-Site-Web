@@ -1,15 +1,14 @@
-import { useEffect, useRef, useState, type ChangeEvent, type DragEvent } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface Props {
     value: string
     onChange: (file: File | null) => void
-    onUploadingChange?: (uploading: boolean) => void
     error?: string
 }
 
 const MAX_MB = 5
 
-const ImageDropZone = ({ value, onChange, onUploadingChange, error }: Props) => {
+const ImageDropZone = ({ value, onChange, error }: Props) => {
     const inputRef = useRef<HTMLInputElement>(null)
 
     const [dragging, setDragging] = useState<boolean>(false)

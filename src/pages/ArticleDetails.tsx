@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, replace, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import type { Article } from "../types/types"
 import { changeActive, getArticleById } from "../service/article"
 import Spinner from "../components/ui/Spinner"
@@ -42,7 +42,7 @@ const ArticlesDetails = () => {
             }
         }
         catch (err: any) {
-            setError(err.message ? err.message : "Could not delete the article.")
+            setActionError(err.message ? err.message : "Could not delete the article.")
             setConfirm(false)
             setBusy(false)
         }
@@ -83,7 +83,7 @@ const ArticlesDetails = () => {
             </ArticleHero>
             <article className="rounded-3xl border border-white/10 bg-card p-6 sm:p-10">
                 <h2 className="text-3xl font-extrabold tracking-normal">Article</h2>
-                <div className="mt-5 w-full whitespace-pre-wrap break-words text-base leading-7 text-slate-300">
+                <div className="mt-5 w-full whitespace-pre-wrap wrap-break-word text-base leading-7 text-slate-300">
                     {article.content}
                 </div>
             </article>

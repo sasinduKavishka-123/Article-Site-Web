@@ -1,4 +1,4 @@
-import { Link, NavLink, replace, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../AuthLayout";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";

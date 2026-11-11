@@ -18,7 +18,7 @@ const Filters: { value: StatusFilter; label: string }[] = [
     { value: "inactive", label: "Inactive" }
 ]
 
-const PAGE_LIMIT = 3
+const PAGE_LIMIT = 5
 
 const AdminArticles = () => {
 

@@ -7,7 +7,7 @@ import ArticleCard from "../components/articles/ArticleCard"
 import Pagination from "../components/ui/Pagination"
 
 const TopArticles = () => {
-    const [articles, setArticles] = useState<Article[]>([])
+    const [articles, setArticles] = useState<Article[]>()
     const [page, setPage] = useState<number>(1)
     const [totalPages, setTotalPages] = useState<number>(10)
     const [loading, setLoading] = useState<boolean>(true)

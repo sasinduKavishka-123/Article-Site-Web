@@ -3,14 +3,11 @@ import Spinner from "../components/ui/Spinner"
 import { useEffect, useState } from "react"
 import EmptyState from "../components/ui/EmptyState"
 import ArticleCard from "../components/articles/ArticleCard"
-import Pagination from "../components/ui/Pagination"
 import { getMyArticles } from "../service/article"
 
 const MyArticles = () => {
 
-    const [articles, setArticles] = useState<any[]>([])
-    const [page, setPage] = useState<number>(1)
-    const [totalPages, setTotalPages] = useState<number>(10)
+    const [articles, setArticles] = useState<any[]>()
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string>("")
 

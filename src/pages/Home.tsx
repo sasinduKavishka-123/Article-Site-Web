@@ -11,7 +11,7 @@ import type { Article } from "../types/types"
 export default function Home() {
 
     const {user} = useAuth()
-    const [articles, setArticles] = useState<Article[]>([])
+    const [articles, setArticles] = useState<Article[]>()
     const [loading, setLoading] = useState<boolean>(true)
     const [page, setPage] = useState<number>(1)
     const [totalPages, setTotalPages] = useState<number>(1)

@@ -13,6 +13,7 @@ import AdminLayout from "../pages/admin/AdminLayout";
 import Overview from "../pages/admin/Overview";
 import AdminArticles from "../pages/admin/AdminArticles";
 import TopArticles from "../pages/TopArticles";
+import NotFound from "../pages/NotFound";
 
 
 type RequireAuthTypes = { children: ReactNode; roles?: string[] }
@@ -80,6 +81,8 @@ export default function AppRouter() {
                         <Route index element={<Overview/>}/>
                         <Route path="articles" element={<AdminArticles/>}/>
                     </Route>
+
+                    <Route path="*" element={<NotFound/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

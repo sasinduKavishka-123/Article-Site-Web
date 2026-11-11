@@ -19,6 +19,7 @@ function pageList(page: number, pages: number): (number | "…")[] {
 const base = "min-w-[2.5rem] rounded-lg border px-3 py-2 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-40"
 
 export default function Pagination({ page, pages, onChange }: Props) {
+
     if (pages <= 1) { return null }
     return (
         <nav aria-label="Pagination" className="mt-10 flex flex-wrap items-center justify-center gap-2">

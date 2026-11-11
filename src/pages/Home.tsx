@@ -21,7 +21,7 @@ export default function Home() {
     const [text, setText] = useState<string>("")
 
     useEffect(() => {
-        fetchArticles("")
+        fetchArticles(text)
     }, [page])
 
     const fetchArticles = (s: string) => {
@@ -42,7 +42,7 @@ export default function Home() {
         setText(s)
         fetchArticles(s)
     }
-
+    
     return (
         <div>
             <section className="py-8 text-center sm:py-14">
@@ -85,8 +85,14 @@ export default function Home() {
                         <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${loading ? "opacity-60" : ""}`}>
                             {articles.map((a) => <ArticleCard key={a._id} article={a}/>)}
                         </div>
-                        {/* <Pagination page={page} pages={totalPages} onChange={(p) => update({ page: p === 1 ? "" : String(p) })} /> */}
-                        <Pagination page={page} pages={totalPages} onChange={(p) => setPage(p)} />
+                        
+                        <Pagination 
+                            page={page} 
+                            pages={totalPages} 
+                            onChange={(p) => {
+                                setPage(p)
+                            }} 
+                        />
                     </>
                 )}
             </section>
